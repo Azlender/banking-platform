@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AmplicodePersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit moduleName="banking-platform.account-processing.main" name="Default">
+        <packages>
+          <package value="ru.t1.academy.account" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit moduleName="banking-platform.client-processing.main" name="Default">
+        <packages>
+          <package value="ru.t1.academy.client" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit moduleName="banking-platform.credit-processing.main" name="Default">
+        <packages>
+          <package value="ru.t1.academy.credit" />
+        </packages>
+      </persistence-unit>
+    </persistence-units>
+  </component>
+</project>

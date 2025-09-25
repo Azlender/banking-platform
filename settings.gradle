@@ -1,1 +1,5 @@
 rootProject.name = 'banking-platform'
+
+include 'client-processing'
+include 'account-processing'
+include 'credit-processing'
