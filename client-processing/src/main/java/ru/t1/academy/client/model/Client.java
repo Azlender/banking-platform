@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "clients")
 public class Client {
 
@@ -21,7 +22,7 @@ public class Client {
 
     @NotBlank
     @Column(nullable = false, unique = true, length = 12)
-    private String clientId; // формат XXFFNNNNNNNN
+    private Long clientId; // формат XXFFNNNNNNNN
 
     // Many Clients → One User
     @ManyToOne(fetch = FetchType.LAZY)

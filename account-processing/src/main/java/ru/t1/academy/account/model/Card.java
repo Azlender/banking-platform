@@ -10,6 +10,7 @@ import ru.t1.academy.account.model.enums.Status;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "cards")
 public class Card {
     @Id

@@ -26,6 +26,9 @@
             <column name="open_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
+            <column name="month_count" type="INT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 

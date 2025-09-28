@@ -1,4 +1,4 @@
-# Используем актуальный образ JDK
+# Используем JDK 21
 FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
@@ -6,7 +6,7 @@ WORKDIR /app
 # Копируем собранный jar
 COPY build/libs/*.jar app.jar
 
-# Открываем порт
+# Открываем порт приложения
 EXPOSE 8080
 
 # Запуск приложения
