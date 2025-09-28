@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "client_products")
 public class ClientProduct {
 

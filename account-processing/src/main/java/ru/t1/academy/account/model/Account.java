@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "accounts")
 public class Account {
     @Id
@@ -20,7 +21,7 @@ public class Account {
 
     @NotNull
     @Column(nullable = false)
-    private Long clientId;
+    private int clientId;
 
     @NotNull
     @Column(nullable = false)

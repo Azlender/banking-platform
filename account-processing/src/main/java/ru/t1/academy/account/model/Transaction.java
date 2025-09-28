@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "transactions")
+@Builder
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,4 +43,5 @@ public class Transaction {
     @NotNull
     @Column(nullable = false)
     private LocalDateTime timestamp;
+
 }
