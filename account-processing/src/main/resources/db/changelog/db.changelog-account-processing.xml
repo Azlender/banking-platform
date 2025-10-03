@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Таблица Account -->
+    <changeSet id="1-create-accounts" author="aazel">
+        <createTable tableName="accounts">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="client_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT"/>
+            <column name="balance" type="NUMERIC(15,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interest_rate" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_recalc" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="card_exist" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица Card -->
+    <changeSet id="2-create-cards" author="aazel">
+        <createTable tableName="cards">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="account_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_cards_account"
+                             references="accounts(id)"/>
+            </column>
+            <column name="card_id" type="VARCHAR(100)"/>
+            <column name="payment_system" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица Payment -->
+    <changeSet id="3-create-payments" author="aazel">
+        <createTable tableName="payments">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="account_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_payments_account"
+                             references="accounts(id)"/>
+            </column>
+            <column name="payment_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="NUMERIC(15,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_credit" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payed_at" type="TIMESTAMP"/>
+            <column name="type" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица Transaction -->
+    <changeSet id="4-create-transactions" author="aazel">
+        <createTable tableName="transactions">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="account_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_transactions_account"
+                             references="accounts(id)"/>
+            </column>
+            <column name="card_id" type="BIGINT">
+                <constraints nullable="true" foreignKeyName="fk_transactions_card"
+                             references="cards(id)"/>
+            </column>
+            <column name="type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="NUMERIC(15,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="timestamp" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

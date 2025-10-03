@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <include file="db/changelog/db.changelog-blacklist.xml"/>
+    <!-- Таблица users -->
+    <changeSet id="1" author="academy">
+        <createTable tableName="users">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="login" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица clients -->
+    <changeSet id="2" author="academy">
+        <createTable tableName="clients">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="client_id" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_birth" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="document_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="document_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="document_prefix" type="VARCHAR(50)"/>
+            <column name="document_suffix" type="VARCHAR(50)"/>
+        </createTable>
+
+        <!-- Внешний ключ на users -->
+        <addForeignKeyConstraint
+                baseTableName="clients"
+                baseColumnNames="user_id"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                constraintName="fk_clients_user"/>
+    </changeSet>
+
+    <!-- Таблица products -->
+    <changeSet id="3" author="academy">
+        <createTable tableName="products">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="key" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица client_products -->
+    <changeSet id="4" author="academy">
+        <createTable tableName="client_products">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="client_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="open_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="close_date" type="DATE"/>
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Внешний ключ на clients -->
+        <addForeignKeyConstraint
+                baseTableName="client_products"
+                baseColumnNames="client_id"
+                referencedTableName="clients"
+                referencedColumnNames="id"
+                constraintName="fk_client_products_client"/>
+
+        <!-- Внешний ключ на products -->
+        <addForeignKeyConstraint
+                baseTableName="client_products"
+                baseColumnNames="product_id"
+                referencedTableName="products"
+                referencedColumnNames="id"
+                constraintName="fk_client_products_product"/>
+    </changeSet>
+
+</databaseChangeLog>
