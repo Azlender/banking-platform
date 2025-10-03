@@ -8,7 +8,17 @@ import ru.t1.academy.account.model.enums.PaymentType;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import ru.t1.academy.account.model.enums.PaymentType;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -43,5 +53,5 @@ public class Payment {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private PaymentType type;
+    private String type;
 }

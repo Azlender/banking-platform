@@ -13,8 +13,8 @@ import java.time.LocalDate;
 public class ClientProductEvent {
     private Long clientId;
     private Long productId;
-    private ProductKey key;
+    private String key;
     private LocalDate openDate;
     private LocalDate closeDate;
-    private ClientProductStatus status;
+    private String status;
 }
