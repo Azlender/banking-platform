@@ -58,10 +58,10 @@ public class ClientProductService {
         ClientProductEvent event = ClientProductEvent.builder()
                 .clientId(clientProduct.getClient().getClientId())
                 .productId(Long.valueOf(clientProduct.getProduct().getProductId()))
-                .key(key)
+                .key(key.toString())
                 .openDate(clientProduct.getOpenDate())
                 .closeDate(clientProduct.getCloseDate())
-                .status(clientProduct.getStatus())
+                .status(String.valueOf(clientProduct.getStatus()))
                 .build();
 
         if (key == ProductKey.DC || key == ProductKey.CC || key == ProductKey.NS || key == ProductKey.PENS) {

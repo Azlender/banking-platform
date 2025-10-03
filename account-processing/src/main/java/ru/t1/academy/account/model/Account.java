@@ -21,7 +21,7 @@ public class Account {
 
     @NotNull
     @Column(nullable = false)
-    private int clientId;
+    private Long clientId;
 
     @NotNull
     @Column(nullable = false)
